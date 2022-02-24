@@ -1,12 +1,23 @@
-import React from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React, {useState} from 'react';
+import { Button, Keyboard, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import { Card } from '../components/Card';
 import { Input } from '../components/Input';
 import colors from '../constants/color'
 
 export const StartGameScreen = () => {
+const [enteredValue, setEnteredValue] = useState('');
+
+const numberInputHandler = (inputText) => {
+    setEnteredValue(inputText.replace(/[^0-9]/g, ''));
+}
+
+
+
   return (
-   <View style={styles.screen}>
+  <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss();
+  }}>
+       <View style={styles.screen}>
 <Text style={styles.title}>Start a New Game !</Text>
 <Card style={styles.inputContainer}>
 <Text>Select a Number</Text>
@@ -14,8 +25,10 @@ export const StartGameScreen = () => {
     blurOnSubmit
     autoCorrect={false}
     autoCapitalize='none'
-    keyboardType='numeric'
+    keyboardType='number-pad'
     maxLength={2}
+    onChangeText={numberInputHandler}
+    value={enteredValue}
     />
     <View style={styles.buttonContainer}>
       <View style={styles.button}>
@@ -27,6 +40,7 @@ export const StartGameScreen = () => {
     </View>
 </Card>
    </View>
+  </TouchableWithoutFeedback>
   )
 }
 
