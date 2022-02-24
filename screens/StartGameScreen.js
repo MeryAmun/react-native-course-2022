@@ -5,7 +5,7 @@ import { Input } from '../components/Input';
 import { NumberContainer } from '../components/NumberContainer';
 import colors from '../constants/color'
 
-export const StartGameScreen = (props) => {
+export const StartGameScreen = ({onStartGame}) => {
 const [enteredValue, setEnteredValue] = useState('');
 const [confirmed, setConfirmed] = useState(false);
 const [selectedNumber, setSelectedNumber] = useState('')
@@ -32,6 +32,7 @@ const confirmInputHandler = () => {
 setConfirmed(true)
 setSelectedNumber(chosenNumber)
 setEnteredValue('')
+Keyboard.dismiss();
 }
 
 let confirmedOutput;
@@ -40,8 +41,8 @@ if(confirmed){
   
   confirmedOutput =  <Card style={styles.summary}>
        <Text> You Selected</Text>
-       <NumberContainer selectedNumber={selectedNumber} {...props}/>
-       <Button title='START GAME'/>
+       <NumberContainer selectedNumber={selectedNumber}/>
+       <Button title='START GAME' onPress={() => onStartGame(selectedNumber)}/>
   </Card>
     
 }
@@ -108,6 +109,7 @@ input:{
     textAlign:'center'
 },
 summary:{
-    marginTop:20
+    marginTop:20,
+    alignItems:'center'
 }
 })
