@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { View, Text, StyleSheet, Button, Alert } from 'react-native'
 import { Card } from '../components/Card';
 import { NumberContainer } from '../components/NumberContainer';
@@ -20,6 +20,13 @@ export const GameScreen = ({userChoice}) => {
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
 
+
+    // useEffect(() => {
+    //   if(currentGuess === userChoice ){
+
+    //   }
+    // }, [third])
+    
 
 
     const nextGuessHandler = (direction) => {
